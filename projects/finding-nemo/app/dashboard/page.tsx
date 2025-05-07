@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Dashboard() {
+export default function Page() {
 	return (
 		<div>
 			<Link href={'/'} className="text-blue-600 hover:underline">

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Home() {
+export default function Page() {
 	return (
 		<div>
 			<div className="w-full flex flex-row gap-4">

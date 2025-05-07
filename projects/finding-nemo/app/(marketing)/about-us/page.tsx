@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function AboutUs() {
+export default function Page() {
 	return (
 		<div className="bg-white min-h-screen flex items-center justify-center px-4 py-12">
 			<div className="max-w-3xl text-center">
