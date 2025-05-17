@@ -54,11 +54,6 @@ export default function Page() {
 						</button>
 					</div>
 				</form>
-				<div className="mt-8">
-					<Link href={'/'} className="text-blue-600 hover:underline">
-						Go to home
-					</Link>
-				</div>
 			</div>
 		</div>
 	)

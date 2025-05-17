@@ -16,11 +16,6 @@ export default function Page() {
 					problems. We value transparency, collaboration, and continuous
 					learning.
 				</p>
-				<div className="mt-8">
-					<Link href={'/'} className="text-blue-600 hover:underline">
-						Go to home
-					</Link>
-				</div>
 			</div>
 		</div>
 	)

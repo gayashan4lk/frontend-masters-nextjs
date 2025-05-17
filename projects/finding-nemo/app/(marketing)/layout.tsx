@@ -15,6 +15,16 @@ export default function Layout({
 						</Link>
 						<nav className="flex flex-row gap-3 items-center">
 							<Link
+								href={'/features'}
+								className="text-sm font-medium hover:text-purple-600">
+								Features
+							</Link>
+							<Link
+								href={'/pricing'}
+								className="text-sm font-medium hover:text-purple-600">
+								Pricing
+							</Link>
+							<Link
 								href={'/about-us'}
 								className="text-sm font-medium hover:text-purple-600">
 								About Us
@@ -23,6 +33,11 @@ export default function Layout({
 								href={'/contact-us'}
 								className="text-sm font-medium hover:text-purple-600">
 								Contact Us
+							</Link>
+							<Link
+								href={'/faq'}
+								className="text-sm font-medium hover:text-purple-600">
+								FAQ
 							</Link>
 						</nav>
 						<div className="flex flex-row gap-3 items-center">
