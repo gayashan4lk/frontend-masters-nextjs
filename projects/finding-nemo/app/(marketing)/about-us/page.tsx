@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Page() {
 	return (
-		<div className="bg-white min-h-screen flex items-center justify-center px-4 py-12">
+		<div className="bg-white flex items-center justify-center px-4 py-12">
 			<div className="max-w-3xl text-center">
 				<h1 className="text-4xl font-bold text-gray-800 mb-6">About Us</h1>
 				<p className="text-lg text-gray-600 mb-4">
