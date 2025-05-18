@@ -1,6 +1,44 @@
+'use client'
+
+import { useActionState } from 'react'
+import Button from '@/app/components/ui/Button'
+import {
+	Form,
+	FormGroup,
+	FormLabel,
+	FormInput,
+	FormError,
+} from '@/app/components/ui/Form'
 import Link from 'next/link'
 
+const initialState = {
+	success: false,
+	message: '',
+	errors: undefined,
+}
+
 export default function Page() {
+	const [state, formAction, isPending] = useActionState(
+		async (prevState: any, formData: any) => {
+			try {
+				console.log('Form data:', formData)
+				console.log('email: ', formData.get('email'))
+				return {
+					success: true,
+					message: 'Form submitted successfully',
+					errors: undefined,
+				}
+			} catch (error) {
+				return {
+					success: false,
+					message: (error as Error).message || 'An error occurred',
+					errors: undefined,
+				}
+			}
+		},
+		initialState,
+	)
+
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -11,6 +49,21 @@ export default function Page() {
 			</div>
 			<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
 				<div className="py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
+					<Form action={formAction}>
+						<FormGroup>
+							<FormLabel htmlFor="email">Email</FormLabel>
+							<FormInput
+								id="email"
+								name="email"
+								autoComplete="email"
+								aria-describedby="email-error"
+							/>
+						</FormGroup>
+						<div>
+							<Button type="submit">Sign up</Button>
+						</div>
+					</Form>
+
 					<div className="text-center flex flex-row gap-2 items-center justify-center">
 						<p className="text-sm text-gray-600">Already have an account?</p>
 						<Link
