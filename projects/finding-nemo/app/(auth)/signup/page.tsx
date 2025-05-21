@@ -10,39 +10,22 @@ import {
 	FormError,
 } from '@/app/components/ui/Form'
 import Link from 'next/link'
+import type { ActionResponse } from '@/app/actions/auth'
+import { signUp } from '@/app/actions/auth'
 
-const initialState = {
+const initialState: ActionResponse = {
 	success: false,
 	message: '',
-	errors: undefined,
+	error: undefined,
 }
 
 export default function Page() {
-	const [state, formAction, isPending] = useActionState(
-		async (prevState: any, formData: any) => {
-			try {
-				console.log('Form data:', formData)
-				console.log('email: ', formData.get('email'))
-				return {
-					success: true,
-					message: 'Form submitted successfully',
-					errors: undefined,
-				}
-			} catch (error) {
-				return {
-					success: false,
-					message: (error as Error).message || 'An error occurred',
-					errors: undefined,
-				}
-			}
-		},
-		initialState,
-	)
+	const [state, formAction, isPending] = useActionState(signUp, initialState)
 
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
-				<h1 className="text-center text-3xl font-extrabold">Mode</h1>
+				<h1 className="text-center text-3xl font-extrabold">{state.message}</h1>
 				<h2 className="mt-2 text-center text-2xl font-bold ">
 					Create a new account
 				</h2>
@@ -52,12 +35,7 @@ export default function Page() {
 					<Form action={formAction}>
 						<FormGroup>
 							<FormLabel htmlFor="email">Email</FormLabel>
-							<FormInput
-								id="email"
-								name="email"
-								autoComplete="email"
-								aria-describedby="email-error"
-							/>
+							<FormInput id="email" name="email" />
 						</FormGroup>
 						<div>
 							<Button type="submit">Sign up</Button>

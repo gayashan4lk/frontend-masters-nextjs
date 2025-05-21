@@ -39,6 +39,11 @@ export default function Layout({
 								className="text-sm font-medium hover:text-purple-600">
 								FAQ
 							</Link>
+							<Link
+								href={'/myForm'}
+								className="text-sm font-medium hover:text-purple-600">
+								My Form
+							</Link>
 						</nav>
 						<div className="flex flex-row gap-3 items-center">
 							<Link
