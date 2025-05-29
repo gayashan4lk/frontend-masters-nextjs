@@ -15,5 +15,6 @@ export async function createUser(
 	console.log('hashedPassword:', hashedPassword)
 	console.log(`Creating user with ID: ${id}`)
 	console.log(`Creating user with email: ${email}`)
+
 	return { id, email }
 }
