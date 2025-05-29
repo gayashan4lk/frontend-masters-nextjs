@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
+import { useState } from 'react'
 import Button from '@/app/components/ui/Button'
 import {
 	Form,
@@ -21,6 +22,8 @@ const initialState: ActionResponse = {
 
 export default function Page() {
 	const [state, formAction, isPending] = useActionState(signUp, initialState)
+	const [showPassword, setShowPassword] = useState(false)
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -37,12 +40,44 @@ export default function Page() {
 							<FormLabel htmlFor="email">Email</FormLabel>
 							<FormInput id="email" name="email" />
 						</FormGroup>
+						<FormGroup>
+							<FormLabel htmlFor="password">Password</FormLabel>
+							<div className="relative flex items-center">
+								<FormInput
+									id="password"
+									name="password"
+									type={showPassword ? 'text' : 'password'}
+								/>
+								<button
+									type="button"
+									className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600 focus:outline-none"
+									onClick={() => setShowPassword(v => !v)}>
+									{showPassword ? 'Hide' : 'Show'}
+								</button>
+							</div>
+						</FormGroup>
+						<FormGroup>
+							<FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+							<div className="relative flex items-center">
+								<FormInput
+									id="confirmPassword"
+									name="confirmPassword"
+									type={showConfirmPassword ? 'text' : 'password'}
+								/>
+								<button
+									type="button"
+									className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600 focus:outline-none"
+									onClick={() => setShowConfirmPassword(v => !v)}>
+									{showConfirmPassword ? 'Hide' : 'Show'}
+								</button>
+							</div>
+						</FormGroup>
 						<div>
 							<Button type="submit">Sign up</Button>
 						</div>
 					</Form>
 
-					<div className="text-center flex flex-row gap-2 items-center justify-center">
+					<div className="text-center flex flex-row gap-2 items-center mt-4">
 						<p className="text-sm text-gray-600">Already have an account?</p>
 						<Link
 							href="/signin"
