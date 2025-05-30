@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Frontend masters Next.js Tutorial',
-  description: 'Frontend masters Next.js Tutorial',
+	title: 'Find Nemo',
+	description: 'Frontend masters Next.js Tutorial',
 }
 
 export default function RootLayout({
