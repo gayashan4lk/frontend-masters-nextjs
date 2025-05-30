@@ -4,7 +4,9 @@ import { ActionResponse, signIn } from '@/app/actions/auth'
 import Button from '@/app/components/ui/Button'
 import { Form, FormGroup, FormInput, FormLabel } from '@/app/components/ui/Form'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useActionState, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const initialState: ActionResponse = {
 	success: false,
@@ -13,8 +15,32 @@ const initialState: ActionResponse = {
 }
 
 export default function Page() {
-	const [state, formAction, isPending] = useActionState(signIn, initialState)
+	const router = useRouter()
+	const [state, formAction, isPending] = useActionState(
+		signInAction,
+		initialState,
+	)
 	const [showPassword, setShowPassword] = useState(false)
+
+	async function signInAction(prevState: ActionResponse, formData: FormData) {
+		try {
+			const result = await signIn(prevState, formData)
+
+			if (result.success) {
+				toast.success('Signed in successfully')
+				router.push('/dashboard')
+				router.refresh()
+			}
+			return result
+		} catch (error) {
+			toast.error('Failed to sign in')
+			return {
+				success: false,
+				message: (error as Error).message || 'An error occurred',
+				error: 'Failed to sign in',
+			}
+		}
+	}
 
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">

@@ -1,6 +1,6 @@
 'use server'
 
-import { createSession, createUser } from '@/lib/auth'
+import { createSession, createUser, verifyPassword } from '@/lib/auth'
 import { getUserByEmail } from '@/lib/data'
 import { mockDelay } from '@/lib/utils'
 import { create } from 'domain'
@@ -75,12 +75,25 @@ export async function signIn(
 	if (!user) {
 		return {
 			success: false,
-			message: 'User not found',
+			message: 'Invalid email or password',
 			error: 'Invalid email or password',
 		}
 	}
 
 	console.log('User found:', user)
+
+	const isPasswordValid = await verifyPassword(
+		data.password as string,
+		user.password,
+	)
+
+	if (!isPasswordValid) {
+		return {
+			success: false,
+			message: 'Invalid email or password',
+			error: 'Invalid email or password',
+		}
+	}
 
 	await createSession(user.id)
 

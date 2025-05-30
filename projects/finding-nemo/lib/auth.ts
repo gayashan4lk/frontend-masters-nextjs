@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { hash } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 import { db } from '@/db'
 import { users } from '@/db/schema'
 import * as jose from 'jose'
@@ -72,6 +72,13 @@ export async function createSession(userId: string) {
 		console.error('Error creating session:', error)
 		return false
 	}
+}
+
+export async function verifyPassword(
+	password: string,
+	hashedPassword: string,
+): Promise<boolean> {
+	return compare(password, hashedPassword)
 }
 
 
