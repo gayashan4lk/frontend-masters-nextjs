@@ -1,7 +1,9 @@
 'use server'
 
-import { createUser } from '@/lib/auth'
+import { createSession, createUser } from '@/lib/auth'
+import { getUserByEmail } from '@/lib/data'
 import { mockDelay } from '@/lib/utils'
+import { create } from 'domain'
 
 export type ActionResponse = {
 	success: boolean
@@ -22,7 +24,7 @@ export async function signUp(
 			confirmPassword: formData.get('confirmPassword'),
 		}
 
-		console.log('Form submitted with data:', data)
+		console.log('SignUp action:', data)
 
 		// Validate
 
@@ -40,7 +42,7 @@ export async function signUp(
 		}
 
 		// create a session
-		//await createSession(user.id)
+		const isSession = await createSession(user.id)
 
 		// return success message
 		return {
@@ -54,5 +56,36 @@ export async function signUp(
 			message: 'An error occurred while creating your account',
 			error: 'Failed to create account',
 		}
+	}
+}
+
+export async function signIn(
+	prevState: ActionResponse,
+	formData: FormData,
+): Promise<ActionResponse> {
+	const data = {
+		email: formData.get('email'),
+		password: formData.get('password'),
+	}
+
+	console.log('SignIn action:', data)
+
+	const user = await getUserByEmail(data.email as string)
+
+	if (!user) {
+		return {
+			success: false,
+			message: 'User not found',
+			error: 'Invalid email or password',
+		}
+	}
+
+	console.log('User found:', user)
+
+	await createSession(user.id)
+
+	return {
+		success: true,
+		message: 'Signed in successfully',
 	}
 }

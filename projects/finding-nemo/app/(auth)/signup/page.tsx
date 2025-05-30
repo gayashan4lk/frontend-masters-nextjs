@@ -28,7 +28,6 @@ export default function Page() {
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
-				<h1 className="text-center text-3xl font-extrabold">{state.message}</h1>
 				<h2 className="mt-2 text-center text-2xl font-bold ">
 					Create a new account
 				</h2>
@@ -86,6 +85,11 @@ export default function Page() {
 						</Link>
 					</div>
 				</div>
+				{state.success && (
+					<div className="my-2 px-4 py-1 bg-green-400 text-sm rounded-md">
+						<span className="text-center">{state.message}</span>
+					</div>
+				)}
 			</div>
 		</div>
 	)
