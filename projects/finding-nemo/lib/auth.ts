@@ -19,14 +19,6 @@ const JWT_SECRET = new TextEncoder().encode(
 	process.env.JWT_SECRET || 'your-secret-key-min-32-chars-long!!!',
 )
 
-export async function generateJWT(payload: JWTPayload): Promise<string> {
-	return await new jose.SignJWT(payload)
-		.setProtectedHeader({ alg: 'HS256' })
-		.setIssuedAt()
-		.setExpirationTime(JWT_EXPIRATION)
-		.sign(JWT_SECRET)
-}
-
 export async function createUser(
 	email: string,
 	password: string,
@@ -50,7 +42,12 @@ export async function createUser(
 
 export async function createSession(userId: string) {
 	try {
-		const token = await generateJWT({ userId })
+		// Generate a JWT token for the user
+		const token = await new jose.SignJWT({ userId })
+			.setProtectedHeader({ alg: 'HS256' })
+			.setIssuedAt()
+			.setExpirationTime(JWT_EXPIRATION)
+			.sign(JWT_SECRET)
 
 		const cookieStore = await cookies()
 
@@ -64,8 +61,14 @@ export async function createSession(userId: string) {
 			sameSite: 'lax',
 		})
 
-		console.log('cookieStore:', cookieStore.get('auth_token'))
-		console.log('Session created successfully:', { userId, token })
+		console.log(
+			'#createSession / cookieStore.auth_token:',
+			cookieStore.get('auth_token'),
+		)
+		console.log('#createSession / Session created successfully:', {
+			userId,
+			token,
+		})
 
 		return true
 	} catch (error) {
@@ -79,6 +82,25 @@ export async function verifyPassword(
 	hashedPassword: string,
 ): Promise<boolean> {
 	return compare(password, hashedPassword)
+}
+
+export async function getSession() {
+	try {
+		const cookieStore = await cookies()
+		console.log('#getSession / cookieStore:', cookieStore)
+		const token = cookieStore.get('auth_token')?.value
+
+		if (!token) {
+			return null
+		}
+
+		const { payload } = await jose.jwtVerify(token, JWT_SECRET)
+
+		return payload as JWTPayload
+	} catch (error) {
+		console.error('Error verifying session:', error)
+		return null
+	}
 }
 
 
