@@ -1,15 +1,17 @@
 import { getCurrentUser } from '@/lib/data'
 import Link from 'next/link'
-import Button from '../components/ui/Button'
+import Button from '@/app/components/ui/Button'
 import { PlusIcon } from 'lucide-react'
 
 export default async function Page() {
-	try {
-		const user = await getCurrentUser()
-		console.log('#dashboard / Current user:', user)
-	} catch (e) {
-		console.error(e)
-	}
+	// try {
+
+	// 	console.log('#dashboard / Current user:', user)
+	// } catch (e) {
+	// 	console.error(e)
+	// }
+
+	const user = await getCurrentUser()
 
 	return (
 		<div>
@@ -35,6 +37,11 @@ export default async function Page() {
 					</Button>
 				</Link>
 			</div>
+			{user && (
+				<div>
+					<h2>{user.email}</h2>
+				</div>
+			)}
 		</div>
 	)
 }

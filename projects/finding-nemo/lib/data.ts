@@ -2,6 +2,7 @@ import { db } from '@/db'
 import { users } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { getSession } from './auth'
+import { mockDelay } from './utils'
 
 export async function getUserByEmail(email: string) {
 	try {
@@ -18,6 +19,7 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getCurrentUser() {
+	mockDelay(5000)
 	const session = await getSession()
 
 	if (!session) return null
