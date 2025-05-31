@@ -1,6 +1,6 @@
 import { db } from '@/db'
-import { users } from '@/db/schema'
-import { eq } from 'drizzle-orm'
+import { issues, users } from '@/db/schema'
+import { eq, desc } from 'drizzle-orm'
 import { getSession } from './auth'
 import { mockDelay } from './utils'
 
@@ -53,5 +53,20 @@ export async function getCurrentUser() {
 	} catch (error) {
 		console.error('Error fetching user by session:', error)
 		throw error
+	}
+}
+
+export async function getIssuesByUserId(userId: string) {
+	try {
+		const result = await db
+			.select()
+			.from(issues)
+			.where(eq(issues.userId, userId))
+			.orderBy(desc(issues.createdAt))
+
+		return result
+	} catch (e) {
+		console.error('Error fetching issues by userId:', e)
+		return []
 	}
 }

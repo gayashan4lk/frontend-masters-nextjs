@@ -10,7 +10,7 @@ export default async function DashboardLayout({
 	return (
 		<div className="flex min-h-screen">
 			<Navigation />
-			<main className="ml-8">
+			<main className="mx-8">
 				<Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
 			</main>
 		</div>
