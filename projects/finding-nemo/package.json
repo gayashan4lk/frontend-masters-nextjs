@@ -1,42 +1,42 @@
 {
-  "name": "finding-nemo",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@neondatabase/serverless": "^1.0.0",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/uuid": "^10.0.0",
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.2",
-    "clsx": "^2.1.1",
-    "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.44.0",
-    "jose": "^6.0.11",
-    "lucide-react": "^0.511.0",
-    "nanoid": "^5.1.5",
-    "next": "15.3.1",
-    "pg": "^8.16.0",
-    "postgres": "^3.4.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-hot-toast": "^2.5.2",
-    "tailwind-merge": "^3.3.0",
-    "uuid": "^11.1.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "drizzle-kit": "^0.31.1",
-    "tailwindcss": "^4",
-    "tsx": "^4.19.4",
-    "typescript": "^5"
-  }
+	"name": "finding-nemo",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@neondatabase/serverless": "^1.0.0",
+		"@types/bcryptjs": "^2.4.6",
+		"@types/uuid": "^10.0.0",
+		"bcrypt": "^6.0.0",
+		"bcryptjs": "^3.0.2",
+		"clsx": "^2.1.1",
+		"dotenv": "^16.5.0",
+		"drizzle-orm": "^0.44.0",
+		"jose": "^6.0.11",
+		"lucide-react": "^0.511.0",
+		"nanoid": "^5.1.5",
+		"next": "15.3.3",
+		"pg": "^8.16.0",
+		"postgres": "^3.4.7",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-hot-toast": "^2.5.2",
+		"tailwind-merge": "^3.3.0",
+		"uuid": "^11.1.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"drizzle-kit": "^0.31.1",
+		"tailwindcss": "^4",
+		"tsx": "^4.19.4",
+		"typescript": "^5"
+	}
 }
